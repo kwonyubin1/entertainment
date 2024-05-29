@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Member-Mapper">
+
+	
+	
+	<update id="GetKey" parameterType="Map">
+		update memberinfo Set_Key = #{param2} where mem_id = #{param}
+	</update>
+	<update id="alter_memberKey" parameterType="Map">
+		update memberinfo Set member_key = 'y' where mem_id = #{param1} and member_key = #{param2}
+	</update>
+	<update id="insertMember">
+		insert 
+		into  
+		MEM(mem_code,mem_id,mem_pwd,mem_email)   
+		values	 
+		(#{mem_code},#{mem_id},#{mem_pwd},#{mem_email})
+	</update>
+	
+	<update id="insertGmember">
+		insert 
+		into 
+		GMEM(gmem_code,name,birth,address,gender,tell)
+		values
+		(#{gmem_code},#{name},#{birth},#{address},#{gender},#{tell})
+	</update>
+	
+	<update id="insertEmployee">
+		insert
+		into
+		ep(ep_code,comp,name,rank,emp)
+		values
+		(#{ep_code},#{comp},#{name},#{rank},#{emp})
+	</update>
+	
+	<update id="insertTroupe">
+		insert  
+		into 
+		TROUPE(tro_code,bupanum,name)
+		values
+		(#{tro_code},#{bupanum},#{name})
+	</update>
+	
+	<update id="updateEmployee">
+		update ep
+		set rank = #{rank}, emp=#{emp}
+		where ep_code = #{ep_code}
+	
+	</update>
+	
+	<select id="selectmember" >
+		select *
+		from
+		mem
+		where mem_code = #{mem_code}
+	</select>
+	
+	<select id="selectmemberList" resultType="member">
+		select *
+		from
+		mem
+	
+	</select>
+	
+	<select id="selectMemberListlike" resultType="member">
+		select *
+		from
+		mem
+		where mem_code like '%'||#{code}||'%'	
+	
+	</select>
+	
+	<select id="selectMemberNextSeq" resultType="int">
+		select MEM_SEQ.nextval as mem_num from dual
+	</select>
+	
+	<select id="selectEmployeeList" resultType="epview">
+		select *
+		from ep_view
+		order by comp asc
+	</select>
+	
+	<select id="selectGmemberList" resultType="gmember">
+		select *
+		from gmem
+	</select>
+	
+	<select id="selectTroupList" resultType="troup">
+		select *
+		from troupe
+	</select>
+	
+	<select id="selectMemberById" parameterType="str" resultType="member">
+		select 
+		* 
+		from mem
+		where mem_id=#{mem_id}
+	</select>
+	<select id="selectMemberByEmail" parameterType="str" resultType="member">
+		select 
+		* 
+		from mem
+		where mem_email=#{mem_email}
+	</select>
+	
+	
+	<update id="updateMemberPwd">
+		update mem
+		set mem_pwd=#{mem_pwd}
+		where mem_id=#{mem_id}
+	</update>
+	
+	
+	<select id="selectGmemberByCode" parameterType="str" resultType="gmember">
+		select 
+		* 
+		from gmem
+		where gmem_code=#{mem_code}
+	</select>
+	
+	<update id="updateAuthkey">
+		update mem
+		set authkey=#{authkey}
+		where mem_code=#{mem_code}
+	
+	</update>
+	<update id="updateAuthstatus">
+		update mem
+		set authstatus=#{authstatus}
+		where mem_code=#{mem_code}
+	
+	</update>
+	
+	<update id="deleteMember" parameterType="str">
+		delete 
+		from mem 
+		where mem_code =#{code}
+	
+	</update>
+	
+	
+	
+	<select id="selectEmployee" resultType="employee" >
+		select * from ep where ep_code = #{ep_code}
+	</select>
+	
+	
+	
+	
+</mapper>

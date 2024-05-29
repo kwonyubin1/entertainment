@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<decorators defaultdir="/WEB-INF/views/decorators">	
+	<decorator name="main" page="decorator.jsp">
+		<pattern>/*</pattern>				
+	</decorator>
+	
+	<!--  <decorator name="openWindow" page="openWindow_decorator.jsp">
+		<pattern>/performrese*</pattern>				
+		
+	</decorator> -->	
+	<excludes>
+		<pattern>/performrese*</pattern>
+
+		<pattern>/manager/calregist*</pattern>
+
+		<pattern>/credit*</pattern>
+
+	</excludes>	
+	
+</decorators>
